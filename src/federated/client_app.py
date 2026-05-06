@@ -9,16 +9,16 @@ from flwr.app import ArrayRecord, Context, Message, MetricRecord, RecordDict
 from flwr.common import ConfigRecord
 from flwr.clientapp import ClientApp
 
-from pytorchexample.task import train_collective_episodic_task
-from pytorchexample.task import train as train_fn
-from pytorchexample.contract_bridge import (
+from src.federated.task import train_collective_episodic_task
+from src.federated.task import train as train_fn
+from src.governance.contract_bridge import (
     ContractBridge,
     CheckpointGovernanceBridge,
 )
-from pytorchexample.config import SMART_CONTRACT_ADDRESS, COLLECTIVE_SCENARIO_EPISODIC, SMART_CONTRACT_AWARE
+from src.federated.config import SMART_CONTRACT_ADDRESS, COLLECTIVE_SCENARIO_EPISODIC, SMART_CONTRACT_AWARE
 
 from stable_baselines3 import PPO
-from pytorchexample.charging_env import SmartChargingEnv
+from src.envs.charging_env import SmartChargingEnv
 
 EV_ROSTER = ["Tesla Model 3 LR", "Nissan Leaf", "Renault Zoe", "Volvo XC90 PHEV"]
 

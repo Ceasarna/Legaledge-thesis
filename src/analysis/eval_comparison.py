@@ -20,10 +20,8 @@ from stable_baselines3 import PPO
 import sys
 
 # ── Adjust this to your project root if needed ──
-PROJECT_ROOT = r"C:\Users\toek3476\FRL\Thesis_2\Thesis_code"
-sys.path.insert(0, os.path.join(PROJECT_ROOT, "quickstart-pytorch"))
-
-from pytorchexample.charging_env import SmartChargingEnv
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+from src.envs.charging_env import SmartChargingEnv
 
 # ═══════════════════════════════════════════════════════════════════════════
 # Configuration
@@ -40,8 +38,7 @@ METRIC_KEYS = [
 ]
 
 RESULTS_DIR = os.path.join(
-    PROJECT_ROOT, "quickstart-pytorch", "pytorchexample",
-    "eval", "individual_governance_results",
+    PROJECT_ROOT, "src", "analysis", "individual_governance_results",
 )
 
 PPO_KWARGS = dict(
@@ -81,9 +78,9 @@ MODEL_PAIRS = [
     },
     {
         "name": "FRL (4 clients)",
-        "no_contract": os.path.join(PROJECT_ROOT, "quickstart-pytorch",
+        "no_contract": os.path.join(PROJECT_ROOT, ".",
                                      "final_model_not_contract_aware_04_16_1.pt"),
-        "contract":    os.path.join(PROJECT_ROOT, "quickstart-pytorch",
+        "contract":    os.path.join(PROJECT_ROOT, ".",
                                      "final_model_single_contract_aware_04_16_1.pt"),
     },
 ]

@@ -2,10 +2,10 @@ import gymnasium as gym
 from gymnasium import spaces
 import numpy as np
 
-from pytorchexample.helper.price_parser import parse_price_data
-from pytorchexample.helper.EV import EV_MODELS
+from src.envs.helper.price_parser import parse_price_data
+from src.envs.helper.EV import EV_MODELS
 
-from pytorchexample.config import COLLECTIVE_SCENARIO_EPISODIC, PARETO_REWARD
+from src.federated.config import COLLECTIVE_SCENARIO_EPISODIC, PARETO_REWARD
 
 PRICE_FORECAST_HORIZON = 6
 DEGRADATION_COST_PER_KWH = 0.05

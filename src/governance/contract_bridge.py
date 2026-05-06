@@ -4,11 +4,21 @@ import time
 from pathlib import Path
 from web3 import Web3
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
 SCALE = 1000
 
-_ARTIFACTS = "C:/Users/toek3476/FRL/Thesis_2/Thesis_code/blockchain/artifacts/contracts"
+_ARTIFACT_CANDIDATES = (
+    PROJECT_ROOT / "artifacts" / "contracts",
+    PROJECT_ROOT / "src" / "governance" / "config" / "artifacts" / "contracts",
+)
 
-SCALE = 1000  # Match Solidity constant
+def _artifact_path(*parts: str) -> Path:
+    for base in _ARTIFACT_CANDIDATES:
+        candidate = base.joinpath(*parts)
+        if candidate.exists():
+            return candidate
+    return _ARTIFACT_CANDIDATES[0].joinpath(*parts)
 
 # ── Process-local transaction log ────────────────────────────────────────
 # Every transact + wait_for_transaction_receipt records (start_wall, end_wall, kind).
@@ -34,7 +44,7 @@ class ContractBridge:
         self.w3 = Web3(Web3.HTTPProvider(rpc_url))
         assert self.w3.is_connected(), "Cannot connect to Hardhat node"
 
-        with open(f"{_ARTIFACTS}/SmartChargingGovernance.sol/SmartChargingGovernance.json") as f:
+        with open(_artifact_path("SmartChargingGovernance.sol", "SmartChargingGovernance.json")) as f:
             abi = json.load(f)["abi"]
 
         self.contract = self.w3.eth.contract(
@@ -91,7 +101,7 @@ class CheckpointGovernanceBridge:
     The contract returns the collective total across all agents.
     """
 
-    ABI_PATH = f"{_ARTIFACTS}/CheckpointGovernance.sol/CheckpointGovernance.json"
+    ABI_PATH = _artifact_path("CheckpointGovernance.sol", "CheckpointGovernance.json")
 
     def __init__(self, contract_address: str, agent_id: int = 0,
                  rpc_url: str = "http://127.0.0.1:8545"):

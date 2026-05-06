@@ -4,7 +4,7 @@ import csv
 from tensorboard.backend.event_processing.event_accumulator import EventAccumulator
 
 # Set this to the root of your logs folder
-LOGS_DIR = r"C:\Users\toek3476\FRL\Thesis_2\Thesis_code\quickstart-pytorch\logs"
+LOGS_DIR = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")), "logs")
 OUTPUT_CSV = os.path.join(LOGS_DIR, "extracted_tb_times.csv")
 
 # Only process folders containing this date

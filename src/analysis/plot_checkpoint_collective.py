@@ -9,7 +9,7 @@ Produces:
   - Overlay plots comparing the two run sets (averaged across agents)
 
 Usage:
-    python -m pytorchexample.eval.plot_checkpoint_collective
+    python -m src.analysis.plot_checkpoint_collective
 """
 
 import os
@@ -23,11 +23,9 @@ from tensorboard.backend.event_processing.event_accumulator import EventAccumula
 # Match the visual style used by plot_individual_governance_training.py
 sns.set_theme(style="darkgrid")
 
-PROJECT_ROOT = r"C:\Users\toek3476\FRL\Thesis_2\Thesis_code"
-sys.path.insert(0, os.path.join(PROJECT_ROOT, "quickstart-pytorch"))
-
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 LOG_BASE = os.path.join(
-    PROJECT_ROOT, "quickstart-pytorch", "logs", "benchmark",
+    PROJECT_ROOT, ".", "logs", "benchmark",
     "federated", "checkpoint_collective",
 )
 

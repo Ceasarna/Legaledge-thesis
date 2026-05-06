@@ -7,7 +7,7 @@ per-agent timing/process/memory metrics, and writes a CSV comparable to the
 Flower throughput CSV.
 
 Usage:
-    python -m pytorchexample.eval.throughput_ray_standalone --dry-run
+    python -m src.analysis.throughput_ray_standalone --dry-run
 """
 
 import argparse
@@ -21,7 +21,7 @@ from typing import Dict, Iterable, List, Optional
 
 import ray
 
-from pytorchexample.config import SMART_CONTRACT_ADDRESS
+from src.federated.config import SMART_CONTRACT_ADDRESS
 
 try:
     import psutil
@@ -129,7 +129,7 @@ class AgentActor:
 
     def _get_bridge(self):
         if self.bridge is None:
-            from pytorchexample.contract_bridge import ContractBridge
+            from src.governance.contract_bridge import ContractBridge
 
             self.bridge = ContractBridge(
                 self.config["contract_address"],

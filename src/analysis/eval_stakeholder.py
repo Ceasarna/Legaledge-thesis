@@ -1,6 +1,5 @@
 """
 Stakeholder Comparison: Pareto-Optimal vs Scalarized Baseline
-=============================================================
 
 Reads sweep_results.csv and compares stakeholder-specific Pareto-optimal
 weight configurations against an equal-weight scalarized baseline.
@@ -16,10 +15,6 @@ Outputs:
   - Console summary
   - LaTeX table for thesis
   - Bar chart comparing stakeholders
-
-Usage:
-    python -m pytorchexample.eval.eval_stakeholder
-    python -m pytorchexample.eval.eval_stakeholder path/to/sweep_results.csv
 """
 
 import os

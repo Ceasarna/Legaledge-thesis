@@ -4,20 +4,20 @@ import torch
 import matplotlib.pyplot as plt
 from stable_baselines3 import PPO
 from stable_baselines3.common.env_checker import check_env # type: ignore
-from pytorchexample.config import SMART_CONTRACT_ADDRESS
-from pytorchexample.contract_bridge import ContractBridge
-from pytorchexample.charging_env import SmartChargingEnv 
+from src.federated.config import SMART_CONTRACT_ADDRESS
+from src.governance.contract_bridge import ContractBridge
+from src.envs.charging_env import SmartChargingEnv
 
 from tensorboardX import SummaryWriter
-from pytorchexample.task import train
-from pytorchexample.contract_bridge import ContractBridge # type: ignore
+from src.federated.task import train
+from src.governance.contract_bridge import ContractBridge # type: ignore
 
 # Centralized training. Mimics the configs of FRL. 
 def train_and_test_single_agent_no_contract_non_IID_mimic_FRL(
     contract_address: str = None,
     agent_id: int = 0,
     total_timesteps: int = 1_000_000,
-    tb_log_dir: str = "quickstart-pytorch/logs/benchmark",
+    tb_log_dir: str = "logs/benchmark",
     batch_size: int = 50,
     n_steps: int = 500,
     learning_rate: float = 3e-4,
@@ -72,7 +72,7 @@ def train_and_test_single_agent_no_contract_non_IID_mimic_FRL_oneEV(
     contract_address: str = None,
     agent_id: int = 0,
     total_timesteps: int = 1_000_000,
-    tb_log_dir: str = "quickstart-pytorch/logs/benchmark",
+    tb_log_dir: str = "logs/benchmark",
     batch_size: int = 50,
     n_steps: int = 500,
     learning_rate: float = 3e-4,
@@ -157,7 +157,7 @@ if __name__ == "__main__":
         train_and_test_single_agent_no_contract_non_IID_mimic_FRL(contract_address=None,
                                                  agent_id=421_1,
                                                  total_timesteps=TIMESTEPS*4,
-                                                 tb_log_dir="quickstart-pytorch/logs/benchmark",
+                                                 tb_log_dir="logs/benchmark",
                                                  batch_size=240,
                                                  n_steps=4800,
                                                  learning_rate=3e-4,
@@ -168,7 +168,7 @@ if __name__ == "__main__":
         train_and_test_single_agent_no_contract_non_IID_mimic_FRL(contract_address=SMART_CONTRACT_ADDRESS,
                                                  agent_id=421_2,
                                                  total_timesteps=TIMESTEPS*4,
-                                                 tb_log_dir="quickstart-pytorch/logs/benchmark",
+                                                 tb_log_dir="logs/benchmark",
                                                  batch_size=240,
                                                  n_steps=4800,
                                                  learning_rate=3e-4,
@@ -181,7 +181,7 @@ if __name__ == "__main__":
             train_and_test_single_agent_no_contract_non_IID_mimic_FRL_oneEV(contract_address=None,
                                                     agent_id=420_0_0+i,
                                                     total_timesteps=TIMESTEPS,
-                                                    tb_log_dir="quickstart-pytorch/logs/benchmark",
+                                                    tb_log_dir="logs/benchmark",
                                                     batch_size=240,
                                                     n_steps=4800,
                                                     learning_rate=2e-4,
@@ -195,7 +195,7 @@ if __name__ == "__main__":
             train_and_test_single_agent_no_contract_non_IID_mimic_FRL_oneEV(contract_address=SMART_CONTRACT_ADDRESS,
                                                     agent_id=420_0_10+i,
                                                     total_timesteps=TIMESTEPS,
-                                                    tb_log_dir="quickstart-pytorch/logs/benchmark",
+                                                    tb_log_dir="logs/benchmark",
                                                     batch_size=240,
                                                     n_steps=4800,
                                                     learning_rate=2e-4,

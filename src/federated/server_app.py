@@ -14,8 +14,8 @@ import numpy as np
 
 # Specfic imports for this app
 from stable_baselines3 import PPO
-from pytorchexample.charging_env import SmartChargingEnv
-from pytorchexample.config import COLLECTIVE_SCENARIO_EPISODIC, SMART_CONTRACT_AWARE, PARETO_REWARD
+from src.envs.charging_env import SmartChargingEnv
+from src.federated.config import COLLECTIVE_SCENARIO_EPISODIC, SMART_CONTRACT_AWARE, PARETO_REWARD
 
 # Create ServerApp
 app = ServerApp()

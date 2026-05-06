@@ -15,12 +15,12 @@ import numpy as np
 import torch
 import matplotlib.pyplot as plt
 from stable_baselines3 import PPO
-from pytorchexample.charging_env import SmartChargingEnv
+from src.envs.charging_env import SmartChargingEnv
 
 
 # ── Config ──────────────────────────────────────────────────────────────────
-MODEL_PATH_1 = "C:/Users/toek3476/FRL/Thesis_2/Thesis_code/quickstart-pytorch/final_model_single_contract_aware_pareto8_noterminalsoc.pt"
-MODEL_PATH = "C:/Users/toek3476/FRL/Thesis_2/Thesis_code/quickstart-pytorch/final_model_single_not_contract_aware_pareto1.pt"
+MODEL_PATH_1 = "final_model_single_contract_aware_pareto8_noterminalsoc.pt"
+MODEL_PATH = "final_model_single_not_contract_aware_pareto1.pt"
 
 
 SEED = 42

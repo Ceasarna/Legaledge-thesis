@@ -16,11 +16,11 @@ and produces:
   3. throughput_summary.csv        : raw grouped data
 
 Usage:
-    python -m pytorchexample.eval.eval_throughput
+    python -m src.analysis.eval_throughput
 
     By default, scans ./logs/benchmark/federated/contract/*/throughput_metrics.csv
     Override by passing paths as arguments:
-        python -m pytorchexample.eval.eval_throughput path1.csv path2.csv
+        python -m src.analysis.eval_throughput path1.csv path2.csv
 """
 
 import os
@@ -30,16 +30,16 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-PROJECT_ROOT = r"C:\Users\toek3476\FRL\Thesis_2\Thesis_code"
-OUT_DIR = os.path.join(PROJECT_ROOT, "quickstart-pytorch", "logs", "eval_throughput")
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+OUT_DIR = os.path.join(PROJECT_ROOT, ".", "logs", "eval_throughput")
 
 # ── Locate CSV files ────────────────────────────────────────────────────
 def find_csvs(args):
     if args:
         return args
     patterns = [
-        os.path.join(PROJECT_ROOT, "quickstart-pytorch", "logs", "benchmark", "federated", "contract", "*", "throughput_metrics.csv"),
-        os.path.join(PROJECT_ROOT, "quickstart-pytorch", "logs", "benchmark", "federated", "no_contract", "*", "throughput_metrics.csv"),
+        os.path.join(PROJECT_ROOT, ".", "logs", "benchmark", "federated", "contract", "*", "throughput_metrics.csv"),
+        os.path.join(PROJECT_ROOT, ".", "logs", "benchmark", "federated", "no_contract", "*", "throughput_metrics.csv"),
     ]
     found = []
     for p in patterns:

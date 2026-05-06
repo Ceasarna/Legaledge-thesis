@@ -22,12 +22,12 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib.colors import TwoSlopeNorm
 from stable_baselines3 import PPO
-from pytorchexample.charging_env import SmartChargingEnv
+from src.envs.charging_env import SmartChargingEnv
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 MODEL_NAME = "Tesla Model 3 LR"
 AGENT_ID   = 1000
-MODEL_PATH = "C:/Users/toek3476/FRL/Thesis_2/Thesis_code/quickstart-pytorch/final_model_single_contract_aware.pt"
+MODEL_PATH = "final_model_single_contract_aware.pt"
 
 PEAK_START, PEAK_END = 17, 20   # peak-hour window (inclusive)
 BG_STEPS   = 40000              # background steps for SHAP baseline

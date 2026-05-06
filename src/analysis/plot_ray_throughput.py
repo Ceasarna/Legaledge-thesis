@@ -5,8 +5,8 @@ By default this scans the current working directory for:
     ray_throughput_*_agents.csv
 
 Usage:
-    python -m pytorchexample.eval.plot_ray_throughput
-    python -m pytorchexample.eval.plot_ray_throughput --input-dir .
+    python -m src.analysis.plot_ray_throughput
+    python -m src.analysis.plot_ray_throughput --input-dir .
 """
 
 import argparse

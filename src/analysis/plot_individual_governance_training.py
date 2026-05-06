@@ -16,7 +16,7 @@ X-axis is PPO training timesteps (0..1,920,000) so all four curves share the
 same budget.
 
 Usage:
-    python -m pytorchexample.eval.plot_individual_governance_training
+    python -m src.analysis.plot_individual_governance_training
 """
 
 import os
@@ -30,13 +30,10 @@ from tensorboard.backend.event_processing.event_accumulator import EventAccumula
 # Apply the OpenAI Spinning Up visual style
 sns.set_theme(style="darkgrid")
 
-PROJECT_ROOT = r"C:\Users\toek3476\FRL\Thesis_2\Thesis_code"
-sys.path.insert(0, os.path.join(PROJECT_ROOT, "quickstart-pytorch"))
-
-LOG_BASE = os.path.join(PROJECT_ROOT, "quickstart-pytorch", "logs", "benchmark")
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+LOG_BASE = os.path.join(PROJECT_ROOT, ".", "logs", "benchmark")
 RESULTS_DIR = os.path.join(
-    PROJECT_ROOT, "quickstart-pytorch", "pytorchexample",
-    "eval", "individual_governance_results",
+    PROJECT_ROOT, "src", "analysis", "individual_governance_results",
 )
 
 # Per-episode axis is logged every 1 episode; each episode is 24 PPO steps.

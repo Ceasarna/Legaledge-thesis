@@ -8,7 +8,7 @@ mean ± std and a (seed-level) Welch's t-test for compliance.
 Usage:
     1. Make sure Hardhat node is running:  npx hardhat node
     2. Deploy CheckpointGovernance contract:  npx hardhat ignition deploy ...
-    3. Run:  python -m pytorchexample.eval.eval_collective
+    3. Run:  python -m src.analysis.eval_collective
 
 TensorBoard logs go to ./logs/eval_collective/<model_tag>/seed_<seed>/agent_<id>
 View with:  tensorboard --logdir ./logs/eval_collective
@@ -18,7 +18,7 @@ import sys
 import os
 
 # Monkey-patch config BEFORE any env/task imports
-import pytorchexample.config as cfg
+import src.federated.config as cfg
 cfg.COLLECTIVE_SCENARIO_EPISODIC = True
 cfg.COLLECTIVE_SCENARIO_SERVER_ROUND = False
 cfg.SMART_CONTRACT_AWARE = True
@@ -31,8 +31,8 @@ from scipy import stats
 from torch.utils.tensorboard import SummaryWriter
 from stable_baselines3 import PPO
 
-from pytorchexample.charging_env import SmartChargingEnv
-from pytorchexample.contract_bridge import CheckpointGovernanceBridge
+from src.envs.charging_env import SmartChargingEnv
+from src.governance.contract_bridge import CheckpointGovernanceBridge
 
 # ── Configuration ────────────────────────────────────────────────────
 CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"

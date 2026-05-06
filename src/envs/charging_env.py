@@ -194,9 +194,7 @@ class SmartChargingEnv(gym.Env):
             self.w_soc = weights[1]
             self.w_compliance = weights[2]
 
-        # Fetch peak-hour window from contract once per episode (read-only call).
-        # When no bridge is attached (no_contract scenarios, eval modes), keep the
-        # defaults set in __init__.
+
         if self.bridge is not None and hasattr(self.bridge, "get_peak_hours"):
             try:
                 self.peak_hour_start, self.peak_hour_end = self.bridge.get_peak_hours()

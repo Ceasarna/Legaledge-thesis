@@ -1,3 +1,2 @@
 # Legaledge-thesis
 
-init setup

@@ -89,6 +89,16 @@ class ContractBridge:
             print(f"Error in record_episode: {e}")
             return None
 
+    def get_peak_hours(self) -> tuple[int, int]:
+        """Read the current peak-hour window from the contract.
+
+        This is a read-only `call` — no gas cost, no transaction, no state change.
+        Returns (peak_start, peak_end) as 0-23 hour integers (inclusive range).
+        """
+        start = self.contract.functions.peakHourStart().call()
+        end = self.contract.functions.peakHourEnd().call()
+        return int(start), int(end)
+
     def submit_batch(self, agent_results: list) -> dict:
         raise NotImplementedError("submit_batch not available in test contract")
 

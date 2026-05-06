@@ -81,6 +81,11 @@ class SmartChargingEnv(gym.Env):
         self.round_id = round_id
         self.episode_slot = 0
 
+        # Peak-hour window — fetched from contract on reset when bridge is available,
+        # otherwise falls back to defaults matching the contract's initial values.
+        self.peak_hour_start = 17
+        self.peak_hour_end = 20
+
         # Checkpoint-based collective tracking
         self.energy_budget_kwh = energy_budget_kwh
         self.collective_utilization = 0.0
@@ -188,6 +193,17 @@ class SmartChargingEnv(gym.Env):
             self.w_price = weights[0]
             self.w_soc = weights[1]
             self.w_compliance = weights[2]
+
+        # Fetch peak-hour window from contract once per episode (read-only call).
+        # When no bridge is attached (no_contract scenarios, eval modes), keep the
+        # defaults set in __init__.
+        if self.bridge is not None and hasattr(self.bridge, "get_peak_hours"):
+            try:
+                self.peak_hour_start, self.peak_hour_end = self.bridge.get_peak_hours()
+            except Exception as e:
+                print(f"[Env] Could not fetch peak hours from contract: {e}")
+
+        if PARETO_REWARD:
             return self._get_observation_pareto(), {}
 
         return self._get_observation(), {}
@@ -307,7 +323,7 @@ class SmartChargingEnv(gym.Env):
 
         # 3. Compliance
         compliance_reward = 0.0
-        is_peak = 17 <= self._get_hour() <= 20
+        is_peak = self.peak_hour_start <= self._get_hour() <= self.peak_hour_end
         if is_peak and power_frac > 0:
             compliance_reward = -(power_frac ** 2) * 10.0
             if power_frac > 0.02:
